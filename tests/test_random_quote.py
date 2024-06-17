@@ -15,4 +15,4 @@ def test_index_status(client):
 
 def test_index_content(client):
     response = client.get("/")
-    assert response.data 
+    assert response.data
