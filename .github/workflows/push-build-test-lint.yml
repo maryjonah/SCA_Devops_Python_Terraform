@@ -1,4 +1,4 @@
-name: Using Terraform to automate Flask App Deployment to an EC2 Instance
+name: Build, Test and Lint Flask Application in branches other than main 
 
 on: 
   push:
