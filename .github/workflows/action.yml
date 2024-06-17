@@ -1,7 +1,7 @@
 name: Using Terraform to automate Flask App Deployment to an EC2 Instance
 
 on: push
-    # branches: [ 'feature/**' ]
+    branches: [ 'feature/**' ]
 
 jobs:
   build:
