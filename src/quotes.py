@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request
-import requests 
+from flask import Flask, render_template
+import requests
 
 app = Flask(__name__)
 
 API_URL = "https://zenquotes.io/api/today"
+
 
 @app.route("/")
 def index():
