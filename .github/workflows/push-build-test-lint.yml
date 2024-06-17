@@ -28,6 +28,9 @@ jobs:
       - name: Run tests
         run: pytest
 
+      - name: Force failure to test no run of deploy workflow
+        run: exit(1)
+
   lint:
     name: Lint
     needs: build
