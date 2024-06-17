@@ -1,4 +1,4 @@
-name: Build, Test and Lint Flask Application in branches other than main 
+name: Build, Test and Lint Flask Application in branches other than main
 
 on: 
   push:

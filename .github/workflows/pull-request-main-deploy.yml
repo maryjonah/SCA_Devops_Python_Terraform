@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: main
   workflow_run:
-    workflows: [ push-build-test-lint ]
+    workflows: ["Build, Test and Lint Flask Application in branches other than main"]
     types: [ completed ]
     branches: [ main ]
 
@@ -12,6 +12,8 @@ jobs:
   print:
     name: Example
     runs-on: ubuntu-latest
+
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       - name: Echo hello world
