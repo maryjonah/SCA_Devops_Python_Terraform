@@ -28,14 +28,15 @@ jobs:
         run: pytest
 
   lint:
+    name: Lint
     needs: build
     runs-on: ubuntu-latest 
 
     steps:
       - uses: actions/checkout@v4
 
-  #     - name: Install linter
-  #       run: pip install flake8
+      - name: Install linter
+        run: pip install flake8
 
   #     - name: Run linter
   #       run: flake8 .
