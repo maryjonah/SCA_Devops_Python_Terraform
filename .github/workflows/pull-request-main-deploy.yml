@@ -3,4 +3,12 @@ name: Deploy Random Quote of Day App to AWS EC2 Instance
 on:
   pull_request:
     branches: main
-    
+
+jobs:
+  print:
+    name: Example
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Echo hello world
+        run:  echo "Hello World, from Mary Jonah"
