@@ -1,6 +1,7 @@
 import pytest
 from src.quotes import app
 
+
 @pytest.fixture
 def client():
     with app.test_client() as c:
@@ -14,4 +15,4 @@ def test_index_status(client):
 
 def test_index_content(client):
     response = client.get("/")
-    assert response.data 
+    assert response.data
