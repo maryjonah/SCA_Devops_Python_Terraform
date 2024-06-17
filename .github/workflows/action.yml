@@ -38,5 +38,5 @@ jobs:
       - name: Install linter
         run: pip install flake8
 
-  #     - name: Run linter
-  #       run: flake8 .
+      - name: Run linter
+        run: flake8 .
