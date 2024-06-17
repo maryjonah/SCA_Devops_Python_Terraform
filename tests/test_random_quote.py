@@ -1,6 +1,7 @@
 import pytest
 from src.quotes import app
 
+
 @pytest.fixture
 def client():
     with app.test_client() as c:
