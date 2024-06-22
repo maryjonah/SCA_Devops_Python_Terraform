@@ -39,8 +39,13 @@ resource "aws_instance" "flask" {
     }
 }
 
+data "aws_vpc" "default" {
+ default = true
+}
+
 resource "aws_security_group" "instance" {
     name = "terraform-example-instance"
+    vpc_id = data.aws_vpc.default.id
 
     ingress {
         from_port   = 8080
@@ -55,6 +60,13 @@ resource "aws_security_group" "instance" {
         protocol    = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }    
+
+    ingress {
+        from_port   = 22
+        to_port     = 22
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
 
     egress {
         from_port   = 0
