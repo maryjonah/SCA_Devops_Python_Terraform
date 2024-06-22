@@ -22,7 +22,7 @@ variable "server_port" {
 
 output "public_ip" {
     value       = aws_instance.flask.public_ip
-    description = "The public IP address of the web server"
+    description = "The public IP address of the web server to view webpage"
 }
 
 resource "aws_instance" "flask" {
