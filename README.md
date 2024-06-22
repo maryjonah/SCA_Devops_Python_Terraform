@@ -4,5 +4,5 @@ The task is to automate the entire process using [Terraform](https://www.terrafo
 
 Tech Stack
 - Flask: used for logic of project .i.e. counting the number of visits.
-- Terraform
+- Terraform: automating the infrastructure setup such as creating ec2, security group and then running the scripts to load files and run the  application
 - GitHub Actions: to automate the build, test, and deployment pipelines.
