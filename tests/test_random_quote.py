@@ -1,5 +1,5 @@
 import pytest
-from src.quotes import app
+from src.app import app
 
 
 @pytest.fixture
