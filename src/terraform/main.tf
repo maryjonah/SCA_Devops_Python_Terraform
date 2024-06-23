@@ -9,7 +9,7 @@ terraform {
         bucket = "visitorterraformstate"
         dynamodb_table = "state-lock"
         key = "global/mystatefile/terraform.tfstate"
-        region = "us-east-2"
+        region = "eu-north-1"
         encrypt = true
     }
 }
