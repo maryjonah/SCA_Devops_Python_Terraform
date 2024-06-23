@@ -6,8 +6,11 @@ terraform {
     }
     
     backend "s3" {
-        key = "terraform.tfstate"
+        bucket = "visitorterraformstate"
+        dynamodb_table = "state-lock"
+        key = "global/mystatefile/terraform.tfstate"
         region = "us-east-2"
+        encrypt = true
     }
 }
 
