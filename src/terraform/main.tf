@@ -33,20 +33,7 @@ resource "aws_instance" "flask" {
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.flask-terraform-sg.id]
 
-    user_data = <<-EOF
-              cd /home/ubuntu/ &&
-              rm -rf SCA_Devops_Python_Project_Terraform
-              git clone https://github.com/maryjonah/SCA_Devops_Python_Terraform.git
-              cd SCA_Devops_Python_Terraform
-              git checkout main &&
-              git reset --hard origin/main &&
-              git pull origin main &&
-              python3 -m venv venv
-              source venv/bin/activate
-              pip install -r requirements.txt
-              cd src/
-              flask run --host=0.0.0.0                
-              EOF
+    user_data = file("${path.module}/script.sh")
 
     user_data_replace_on_change = true
 
