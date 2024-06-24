@@ -31,7 +31,7 @@ output "public_ip" {
 resource "aws_instance" "flask" {
     ami = "ami-0fb653ca2d3203ac1"
     instance_type = "t2.micro"
-    vpc_security_group_ids = [aws_security_group.instance.id]
+    vpc_security_group_ids = [aws_security_group.flask-terraform-sg.id]
 
     user_data = <<-EOF
               cd /home/ubuntu/ &&
@@ -51,11 +51,11 @@ resource "aws_instance" "flask" {
     user_data_replace_on_change = true
 
     tags = {
-        Name = "terraform-example"
+        Name = "sca-flask-terraform-project"
     }
 }
 
-resource "aws_security_group" "instance" {
+resource "aws_security_group" "flask-terraform-sg" {
     name = "terraform-example-instance"
 
     ingress {
