@@ -29,7 +29,7 @@ output "public_ip" {
 }
 
 resource "aws_instance" "flask" {
-    ami = "ami-0fb653ca2d3203ac1"
+    ami = "ami-033fabdd332044f06"
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.flask-terraform-sg.id]
 
