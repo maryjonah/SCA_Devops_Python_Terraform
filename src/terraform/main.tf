@@ -96,7 +96,7 @@ resource "aws_instance" "flask" {
     flask run --host=0.0.0.0
     EOF
 
-    # [test without this first] user_data_replace_on_change = true
+    user_data_replace_on_change = true
 
     tags = {
         Name = "sca-flask-terraform-project"
