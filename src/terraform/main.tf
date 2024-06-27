@@ -81,14 +81,13 @@ resource "aws_instance" "flask" {
     vpc_security_group_ids = [aws_security_group.flask-terraform-sg.id]
 
     user_data = <<EOF
-    #!/bin/bash
-    sudo apt update -y
+    apt update -y
     cd /home/ubuntu/
     rm -rf SCA_Devops_Python_Project_Terraform
     git clone https://github.com/maryjonah/SCA_Devops_Python_Terraform.git
     cd SCA_Devops_Python_Terraform
-    sudo apt install python3-venv -y
-    sudo apt install python3-pip -y
+    apt install python3-venv -y
+    apt install python3-pip -y
     python3 -m venv venv
     source venv/bin/activate
     pip install -r requirements.txt
