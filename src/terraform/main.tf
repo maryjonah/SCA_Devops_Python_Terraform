@@ -81,6 +81,7 @@ resource "aws_instance" "flask" {
     vpc_security_group_ids = [aws_security_group.flask-terraform-sg.id]
 
     user_data = <<EOF
+    #!/bin/bash
     apt update -y
     cd /home/ubuntu/
     rm -rf SCA_Devops_Python_Project_Terraform
