@@ -33,6 +33,11 @@ variable "ssh_port" {
     default     = 22
 }
 
+variable "outbound_anywhere" {
+    type = number
+    default = 0
+}
+
 # Security Group
 resource "aws_security_group" "flask-terraform-sg" {
     name = "terraform-example-instance"
@@ -63,8 +68,8 @@ resource "aws_security_group" "flask-terraform-sg" {
 
     egress {
         description = "Outbound"
-        from_port   = 0
-        to_port     = 0
+        from_port   = var.outbound_anywhere
+        to_port     = var.outbound_anywhere
         protocol    = "-1"
         cidr_blocks = ["0.0.0.0/0"]
   }
