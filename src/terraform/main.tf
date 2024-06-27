@@ -18,26 +18,77 @@ provider "aws" {
     region = "us-east-2"
 }
 
-variable "server_port" {
+variable "flask_port" {
     type        = number
     default     = 5000
 }
 
+variable "http_port" {
+    type        = number
+    default     = 80
+}
+
+variable "ssh_port" {
+    type        = number
+    default     = 22
+}
+
+# Security Group
+resource "aws_security_group" "flask-terraform-sg" {
+    name = "terraform-example-instance"
+
+    ingress {
+        description = "Flask"
+        from_port   = var.flask_port
+        to_port     = var.flask_port
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    ingress {
+        description = "Webserver"
+        from_port   = var.http_port
+        to_port     = var.http_port
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    ingress {
+        description = "SSH"
+        from_port   = var.ssh_port
+        to_port     = var.ssh_port
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    egress {
+        description = "Outbound"
+        from_port   = 0
+        to_port     = 0
+        protocol    = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 output "public_ip" {
     value       = aws_instance.flask.public_ip
-    description = "The public IP address of the web server to view webpage"
+    description = "Public IP of EC2 instance"
 }
 
 resource "aws_instance" "flask" {
-    ami = "ami-033fabdd332044f06"
+    ami = "ami-076fe60835f136dc9"
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.flask-terraform-sg.id]
 
     user_data = <<EOF
-    cd /home/ubuntu/ &&
+    #!/bin/bash
+    sudo apt update -y
+    cd /home/ubuntu/
     rm -rf SCA_Devops_Python_Project_Terraform
     git clone https://github.com/maryjonah/SCA_Devops_Python_Terraform.git
     cd SCA_Devops_Python_Terraform
+    sudo apt install python3-venv -y
+    sudo apt install python3-pip -y
     python3 -m venv venv
     source venv/bin/activate
     pip install -r requirements.txt
@@ -45,41 +96,11 @@ resource "aws_instance" "flask" {
     flask run --host=0.0.0.0
     EOF
 
-    user_data_replace_on_change = true
+    # [test without this first] user_data_replace_on_change = true
 
     tags = {
         Name = "sca-flask-terraform-project"
     }
 }
 
-resource "aws_security_group" "flask-terraform-sg" {
-    name = "terraform-example-instance"
 
-    ingress {
-        from_port   = 80
-        to_port     = 80
-        protocol    = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-
-    ingress {
-        from_port   = var.server_port
-        to_port     = var.server_port
-        protocol    = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-
-    ingress {
-        from_port   = 22
-        to_port     = 22
-        protocol    = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-
-    egress {
-        from_port   = 0
-        to_port     = 0
-        protocol    = "-1"
-        cidr_blocks = ["0.0.0.0/0"]
-  }
-}
