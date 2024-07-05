@@ -15,7 +15,7 @@ terraform {
 }
 
 provider "aws" {
-    region = "ap-southeast-2"
+    region = "us-east-2"
 }
 
 variable "flask_port" {
