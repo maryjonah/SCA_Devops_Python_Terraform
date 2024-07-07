@@ -22,8 +22,8 @@ provider "aws" {
 }
 
 provider "datadog" {
-  api_key = ${{ DD_API_KEY }
-  app_key = ${{ DD_APP_KEY }
+  api_key = ${{ secrets.DD_API_KEY }
+  app_key = ${{ secrets.DD_APP_KEY }
   api_url = "https://app.datadoghq.eu"
 }
 
