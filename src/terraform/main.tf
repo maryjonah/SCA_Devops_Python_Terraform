@@ -3,6 +3,9 @@ terraform {
         aws = {
             source = "hashicorp/aws"
         }
+        datadog = {
+            source = "DataDog/datadog"
+        }
     }
     
     backend "s3" {
@@ -16,6 +19,12 @@ terraform {
 
 provider "aws" {
     region = "ap-southeast-2"
+}
+
+provider "datadog" {
+  api_key = ${{ DD_API_KEY }
+  app_key = ${{ DD_APP_KEY }
+  api_url = "https://app.datadoghq.eu"
 }
 
 variable "flask_port" {
@@ -97,9 +106,8 @@ resource "aws_instance" "flask" {
     python3 -m venv venv
     source venv/bin/activate
     pip install -r requirements.txt
-    "DD_API_KEY"=${{ secrets.AWS_ACCESS_KEY_ID }} "DD_SITE"="datadoghq.eu"  bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
     cd src/
-    DD_ENV=dev DD_VERSION=0.1.0 ddtrace-run flask run --host=0.0.0.0
+    ddtrace-run flask run --host=0.0.0.0
     EOF
 
     user_data_replace_on_change = true
