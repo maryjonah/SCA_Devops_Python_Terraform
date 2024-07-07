@@ -94,7 +94,7 @@ resource "aws_instance" "flask" {
     cd SCA_Devops_Python_Terraform
     sudo apt install python3-venv -y
     sudo apt install python3-pip -y
-    "DD_API_KEY=${{ secrets.AWS_ACCESS_KEY_ID }}" "DD_SITE=""datadoghq.eu"  "bash -c" "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+    "DD_API_KEY=${{ secrets.AWS_ACCESS_KEY_ID }} DD_SITE='datadoghq.eu'  bash -c '$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)'"
     python3 -m venv venv
     source venv/bin/activate
     pip install -r requirements.txt
