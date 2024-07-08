@@ -22,8 +22,9 @@ provider "aws" {
 }
 
 provider "datadog" {
-  api_key = ${{ secrets.DD_API_KEY }}
-  app_key = ${{ secrets.DD_APP_KEY }}
+  # Note that they have been revoked and a better implementation will be to use Hashicorp Vault
+  api_key = "c3b0fb33bb162f96147e22c99c191226"
+  app_key = "501a16e6bdef8c4435ebe66957d430407e8acb0f"
   api_url = "https://app.datadoghq.eu"
 }
 
@@ -117,4 +118,9 @@ resource "aws_instance" "flask" {
     }
 }
 
-
+resource "datadog_monitor" "cpumonitor" {
+  name = "cpu monitor"
+  type = "metric alert"
+  message = "CPU usage alert"
+  query = "avg(last_1m):avg:system.cpu.system{*} by {host} > 60"
+}
