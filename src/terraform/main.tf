@@ -3,9 +3,6 @@ terraform {
         aws = {
             source = "hashicorp/aws"
         }
-        datadog = {
-            source = "DataDog/datadog"
-        }
     }
     
     backend "s3" {
@@ -19,13 +16,6 @@ terraform {
 
 provider "aws" {
     region = "ap-southeast-2"
-}
-
-provider "datadog" {
-  # Note that they have been revoked and a better implementation will be to use Hashicorp Vault
-  api_key = "c3b0fb33bb162f96147e22c99c191226"
-  app_key = "501a16e6bdef8c4435ebe66957d430407e8acb0f"
-  api_url = "https://app.datadoghq.eu"
 }
 
 variable "flask_port" {
@@ -116,11 +106,4 @@ resource "aws_instance" "flask" {
     tags = {
         Name = "sca-flask-terraform-assignment"
     }
-}
-
-resource "datadog_monitor" "cpumonitor" {
-  name = "cpu monitor"
-  type = "metric alert"
-  message = "CPU usage alert"
-  query = "avg(last_1m):avg:system.cpu.system{*} by {host} > 60"
 }
