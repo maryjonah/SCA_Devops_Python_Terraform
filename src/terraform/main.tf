@@ -18,7 +18,7 @@ provider "aws" {
     region = "ap-southeast-2"
 }
 
-provider "datadog' {
+provider "datadog" {
   # Note that they have been revoked and a better implementation will be to use Hashicorp Vault
   api_key = "c3b0fb33bb162f96147e22c99c191226"
   app_key = "501a16e6bdef8c4435ebe66957d430407e8acb0f"
