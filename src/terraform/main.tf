@@ -108,7 +108,7 @@ resource "aws_instance" "flask" {
     source venv/bin/activate
     pip install -r requirements.txt
     cd src/
-    ddtrace-run flask run --host=0.0.0.0
+    flask run --host=0.0.0.0
     EOF
 
     user_data_replace_on_change = true
