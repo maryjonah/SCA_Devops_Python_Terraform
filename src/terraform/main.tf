@@ -1,10 +1,16 @@
 terraform {
-    required_providers {
-        aws = {
-            source = "hashicorp/aws"
-        }
+  required_version = ">= 0.13"
+
+  required_providers {
+    datadog = {
+      source  = "DataDog/datadog"
     }
-    
+
+    aws = {
+      source  = "hashicorp/aws"
+    }
+  }
+
     backend "s3" {
         bucket = "visitorterraformstate"
         dynamodb_table = "state-lock"
@@ -12,6 +18,7 @@ terraform {
         region = "eu-north-1"
         encrypt = true
     }
+
 }
 
 provider "aws" {
