@@ -107,6 +107,6 @@ resource "aws_instance" "flask" {
     user_data_replace_on_change = true
 
     tags = {
-        Name = "sca-flask-terraform-assignment"
+        Name = "sca-flask-terraform"
     }
 }
