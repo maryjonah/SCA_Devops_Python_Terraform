@@ -1,10 +1,12 @@
 terraform {
-    required_providers {
-        aws = {
-            source = "hashicorp/aws"
-        }
+  required_version = ">= 0.13"
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
     }
-    
+  }
+
     backend "s3" {
         bucket = "visitorterraformstate"
         dynamodb_table = "state-lock"
@@ -12,6 +14,7 @@ terraform {
         region = "eu-north-1"
         encrypt = true
     }
+
 }
 
 provider "aws" {
@@ -104,8 +107,6 @@ resource "aws_instance" "flask" {
     user_data_replace_on_change = true
 
     tags = {
-        Name = "sca-flask-terraform-assignment"
+        Name = "sca-flask-terraform"
     }
 }
-
-
